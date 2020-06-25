@@ -61,8 +61,41 @@ git commit -m  #-m后的位置是用来写注释的（说明书）。
 ~~~~git
 git init      #可以把当前目录变成Git管理的仓库.
 git status    #查询操作的空间的状态
+git status -s        #加了参数以后会以短命令显示，不会显示详细信息
 
+git diff
+执行 git diff 来查看执行 git status 的结果的详细信息。
+
+git diff 
+命令显示已写入缓存与已修改但尚未写入缓存的改动的区别。
+git diff 有两个主要的应用场景。
+
+  # 尚未缓存的改动：git diff
+  # 查看已缓存的改动： git diff --cached
+  # 查看已缓存的与未缓存的所有改动：git diff HEAD
+  # 显示摘要而非整个diff： git diff --stat
 ~~~~
+
+##### git命令基本和linux差不多
+
+~~~~git
+touch 文件名              #在该文件下创建一个文件
+mkdir 文件夹名           #创建一个文件夹
+cd  文件夹名              #移动到文件夹下
+ls                      # 查看该文件夹下所有内容
+vim 文件名               #编辑该文件
+~~~~
+
+
+
+##### 拷贝项目
+
+~~~~git
+git clone 路径   #将项目拷贝到本文件夹中
+git clone 路径 文件夹名（a）  # 在本文件中创建一个文件夹将项目拷贝进去
+~~~~
+
+
 
 ##### 版本查询
 
@@ -71,6 +104,39 @@ git log #查看当前版本， 以及当前版本之前的所有版本
 git refog  #查看所有的版本及恢复记录
 
 ~~~~
+
+### git reset HEAD
+
+~~~~git
+git reset HEAD 文件名 #命令用于取消已缓存的内容，不写文件名就是取消所有
+					#简而言之，执行 git reset HEAD 以取消之前 git add 添加，但不希望包含在下一提交快照中的缓存。
+~~~~
+
+### git rm
+
+如果只是简单地从工作目录中手工删除文件，运行 **git status** 时就会在 **Changes not staged for commit** 的提示。
+
+要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除，然后提交。可以用以下命令完成此项工作
+
+~~~~git
+git rm <file>   #删除文件，对于没上传到暂存区的文件
+git rm -f <file> #以上传执行这个命令
+git rm -f <file >   #如果把文件从暂存区域移除，但仍然希望保留在当前工作目录中，换句话说，仅是从跟踪清单中删除，使用 --cached 选项即可
+
+~~~~
+
+### git mv
+
+git mv 命令用于移动或重命名一个文件、目录、软连接。
+
+~~~~git
+前提是要把文件加入缓存区
+git add old new
+~~~~
+
+
+
+
 
 ##### 回滚
 
