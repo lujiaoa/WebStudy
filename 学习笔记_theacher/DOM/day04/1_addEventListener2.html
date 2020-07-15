@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8" />
+   <title>...</title>
+   <script>
+   </script>
+</head>
+
+<body>
+   <button id="btnShoot">shoot</button><br>
+   <button id="btnAward">获得跟踪导弹</button><br>
+   <button id="btnBreak">失去跟踪导弹</button><br>
+   <script>
+      var btnShoot=document.getElementById("btnShoot");
+      var btnAward=document.getElementById("btnAward");
+      var btnBreak=document.getElementById("btnBreak");
+      //需求: 
+      //开局: 点shoot按钮，只能发射一种普通子弹
+      btnShoot.onclick=function(){
+         console.log(`发射普通子弹......`);
+      }
+      //定义数组保存所有添加的跟踪导弹函数: 
+      var funs=[];
+      //点获得跟踪导弹按钮: 给shoot按钮再添加一种跟踪导弹
+      btnAward.onclick=function(){
+         //每点击一次添加就创建一个新函数，加入数组中
+         var shoot=function(){
+            alert(`发射跟踪导弹=>=>=>`);
+         }
+         funs.push(shoot)
+         btnShoot.addEventListener("click",shoot)
+      }
+         //结果: 再点shoot按钮时，可以发射两种子弹！
+      //点失去跟踪导弹按钮: 从shoot按钮上移除跟踪导弹
+      btnBreak.onclick=function(){
+         for(var fun of funs){
+            btnShoot.removeEventListener(
+               "click", fun
+            )
+         }
+      }
+         //结果: 再点shoot按钮时，恢复成只发射一种子弹
+
+   </script>
+</body>
+
+</html>

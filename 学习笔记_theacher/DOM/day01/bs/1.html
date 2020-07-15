@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //百度网盘地址: 链接：https://pan.baidu.com/s/1xI3456vwGCOj5whP7r2oEg  提取码：6ay8 
+    this.b='2';
+    function abc(){
+      let b=1; ++b;
+      setTimeout(()=>{
+        test('fun test');
+      },0);
+      setTimeout(
+        test('test fun')
+      ,1000);
+      console.log(b);
+      function test(str){
+        this.b++;
+        console.log(str);
+        console.log(this.b++);
+      }
+    }
+    abc();
+  </script>
+</body>
+</html>

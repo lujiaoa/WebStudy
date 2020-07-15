@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p id="p1">来自<a href="javascript:;">&lt;&lt;新华社&gt;&gt;</a>的消息</p>
+  <p id="p2"></p>
+  <p id="p3"></p>
+  <input id="uname" type="text"/>
+  <button id="btn">提交</button>
+  <script>
+    var p1=document.getElementById("p1");
+    var p2=document.getElementById("p2");
+    var p3=document.getElementById("p3");
+    //获取内容: 
+    //想获得p1中的原始的HTML内容
+    console.log(p1.innerHTML);
+    //想获得p1中的纯文本内容
+    console.log(p1.textContent);
+    //修改内容: 
+    //想修改p2的原始的HTML内容: 
+    p2.innerHTML=`来自<a href="javascript:;">&lt;&lt;新华社&gt;&gt;</a>的消息`;
+    //想修改p3的纯文本内容: 
+    p3.textContent=`来自<a href="javascript:;">&lt;&lt;新华社&gt;&gt;</a>的消息`;
+
+    //想点提交按钮时，获取文本框中用户输入的内容
+    var btn=document.getElementById("btn");
+    btn.onclick=function(){
+      var uname=document.getElementById("uname");
+      //错误: 
+      // console.log(`你输入的用户名是:${uname.innerHTML}`);
+      //正确: 
+      console.log(`你输入的用户名是:${uname.value}`);
+    }
+  </script>
+</body>
+</html>

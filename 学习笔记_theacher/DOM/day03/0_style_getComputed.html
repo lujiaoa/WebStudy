@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1{
+      background-color:red;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="h1" style="color:yellow">欢迎访问tmooc</h1>
+  <p>welcome to my first web site</p>
+  <script>
+    var h1=document.getElementById("h1");
+    //想获得h1的字体颜色，背景颜色，字号
+    //使用style: 
+    // console.log(h1.style.color);//yellow
+    // console.log(h1.style.backgroundColor);//空
+    // console.log(h1.style.fontSize);//空
+
+    //获取计算后样式: 
+    var style=getComputedStyle(h1);
+    console.log(style.color);//
+    console.log(style.backgroundColor);//
+    console.log(style.fontSize);//
+
+    //想修改h1的字体为64px
+    //错误: 修改计算后的样式
+    //style.fontSize="64px";//报错：Failed to set the 'font-size' property on 'CSSStyleDeclaration': These styles are computed, and therefore the 'font-size' property is read-only.
+    //正确: 修改内联，仅影响当前元素自己，不影响别人
+    h1.style.fontSize="64px";
+  </script>
+</body>
+</html>

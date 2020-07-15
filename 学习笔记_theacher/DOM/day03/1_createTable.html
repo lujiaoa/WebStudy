@@ -1,0 +1,60 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>动态创建表格</title>
+<meta charset="utf-8" />
+<style>
+	table{width:600px; border-collapse:collapse;
+		text-align:center;
+	}
+	td,th{border:1px solid #ccc}
+</style>
+
+</head>
+<body>
+	<div id="data">
+  <!-- table>thead>tr>th*3 -->
+    <table>
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>薪资</th>
+          <th>年龄</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <script>
+	var json=[
+    {"ename":"Tom", "salary":11000, "age":25},
+    {"ename":"John", "salary":13000, "age":28},
+    {"ename":"Mary", "salary":12000, "age":25}
+  ];
+  //1. 在HTML中手工添加固定不变的table和表头行内容
+
+  //查找id为data的div下的table元素
+  var table=document.querySelector("#data>table")
+	//2. 创建一个tbody元素
+  var tbody=document.createElement("tbody");
+  //暂时不要添加到table中
+  //table.appendChild(tbody);
+  //3. 遍历json数组中每个员工对象
+  for(var emp of json){
+    //4. 每遍历一个员工对象，就创建一个tr元素，追加到tbody中
+    var tr=document.createElement("tr");
+    tbody.appendChild(tr);
+    //5. 遍历当前员工对象中每个属性
+    for(var key in emp){
+      //每遍历一个属性值，就创建td，追加到tr中
+      var td=document.createElement("td");
+      tr.appendChild(td);
+      //6. 设置td的内容为当前属性的属性值
+      td.innerHTML=emp[key];
+    }
+  }
+
+  //7. 当tbody元素下所有子内容填充完成之后，再将tbody一次性添加到dom树
+  table.appendChild(tbody);
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container{
+      width:200px;
+      height:200px;
+      border-radius:5px; 
+      background-color:purple;
+    }
+    /*40x4+8*5=200*/
+    #container>div{
+      width:40px;
+      height:40px;
+      background-color:#fff;
+      margin-top:8px;
+      margin-left:8px;
+      float:left;
+      border-radius:4px;
+      line-height:40px;
+      text-align:center;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <!--百度网盘地址: 链接：https://pan.baidu.com/s/180f3pAXOxFiOmrAYhZ1bcw 提取码：iei3-->
+  <!--动态生成4*4表格，每个表格中有坐标(0,0) - (3,3) 点击格增加次数，且每个格互不干扰(闭包！)，次数通过弹窗显示-->
+  <!--1. 先做静态页面-->
+  <div id="container">
+    
+  </div>
+  <script>
+    (function(){//外层函数
+      var arr=[
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0]
+      ];
+      var div=document.getElementById("container")
+      //2. 动态为div添加16个子div
+      for(var r=0;r<4;r++){//外层循环控制行号
+        for(var c=0;c<4;c++){//内层循环控制列号
+          var cell=document.createElement("div");
+          cell.innerHTML=`(${r},${c})`;
+          div.appendChild(cell);
+          //方案1: 直接给每个格子添加单击事件处理函数，每个处理函数来自于一个闭包的外层函数调用的返回值，且闭包保存一个变量n，记录当前格子的点击次数——缺点: 每个n完全隔离，每个格子的n和n之间无法进行计算等操作
+          // cell.onclick=(function(){
+          //   var n=0;//当前格子的点击次数
+          //   return function(){
+          //     n++;
+          //     alert(`点了${n}次`);
+          //   }
+          // })();
+          // //cell.onclick=function(){(var n=0;) n++;alert(`点了${n}次`);}
+
+          //方案2: 今后只要看到二维的布局，2048或消消乐，都应该用二维数组来存储所有格子的值。每个按钮的单击事件处理函数中应该只保存自己对应的元素的下标位置！当点击时，通过自己保存的行号和列号来找到二维数组中自己对应的元素值，修改。——缺点: arr数组是全局变量
+          cell.onclick=(function(r,c){ //内层  //外层
+            return function(){ //内层
+              //将二维数组中r行c列的值+1
+              arr[r][c]++;
+              alert(`点击了${arr[r][c]}次`);
+            }
+          })(r,c);//将外部循环过程中r和c的值，传入妈妈函数中。保存到妈妈函数的局部变量r和c中
+          //比如: 
+          //第一个cell: 外部for循环的r=0,c=0时
+          //cell.onclick=function(){(r=0,c=0) arr[r][c]++; alert(`点击了${arr[r][c]}次`); }
+          //第二个cell: 外部for循环的r=0,c=1时
+          //cell.onclick=function(){ (r=0,c=1) arr[r][c]++; alert(`点击了${arr[r][c]}次`); }
+
+          //方案3: 用匿名函数自调包裹整段代码！arr就成了局部变量，会被内层函数引用着，不会释放。但是外部也不能擅自修改了！
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

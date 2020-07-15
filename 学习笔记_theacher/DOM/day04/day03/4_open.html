@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>打开新链接方式总结</title>
+		<script>
+			/*打开新链接方式总结：
+			1. 在当前窗口打开，可后退
+			2. 在当前窗口打开，禁止后退
+			3. 在新窗口打开，可同时打开多个
+			4. 在新窗口打开，只能打开一个
+			*/
+		</script>
+	</head>
+	<body>
+		<h3>1. 在当前窗口打开，可后退</h3>
+		<a href="http://tmooc.cn" target="_self">go to tmooc</a><br/>
+		<button id="btn1">go to tmooc</button>
+		<h3>2. 在当前窗口打开，禁止后退</h3>
+		<button id="btn2">go to tmooc</button>
+		<h3>3. 在新窗口打开，可同时打开多个</h3>
+		<a href="http://tmooc.cn" target="_blank">go to tmooc</a><br/>
+		<button id="btn3">go to tmooc</button>
+		<h3>4. 在新窗口打开，只能打开一个</h3>
+		<a href="http://tmooc.cn" target="abc">go to tmooc</a><br/>
+		<button id="btn4">go to tmooc</button>
+		<script>
+			var btn1=document.getElementById("btn1");
+			btn1.onclick=function(){
+				//window.open("http://tmooc.cn","_self");
+				//location.assign("http://tmooc.cn");
+				location.href="http://tmooc.cn";
+			}
+			var btn2=document.getElementById("btn2");
+			btn2.onclick=function(){
+				location.replace("http://tmooc.cn");
+			}
+			var btn3=document.getElementById("btn3");
+			btn3.onclick=function(){
+				window.open("http://tmooc.cn","_blank");
+			}
+			var btn4=document.getElementById("btn4");
+			btn4.onclick=function(){
+				window.open("http://tmooc.cn","abc");
+			}
+		</script>
+	</body>
+</html>

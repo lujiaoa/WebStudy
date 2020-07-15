@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+ <head>
+	<meta charset="UTF-8">
+	<title>在当前显示区范围内实现点不到的小方块</title>
+	<style>
+		div{
+			position:fixed;
+			width:100px;
+			height:100px;
+			top:200px;
+			left:300px;
+			background-image:url(images/xiaoxin.gif);
+      background-size:100%;
+		}
+	</style>
+	
+ </head>
+ <body>
+	<div id="pop"></div>
+  <script>
+		//希望点击图片中某个位置，获得鼠标的三组坐标
+		var pop=document.getElementById("pop");
+		pop.onclick=function(e){
+			console.log(`距离屏幕左上角: x=${e.screenX},y=${e.screenY}`);
+			console.log(`距离文档显示区左上角: x=${e.clientX},y=${e.clientY}`);
+			console.log(`距离当前事件所在元素左上角: x=${e.offsetX},y=${e.offsetY}`);
+		}
+	</script>
+ </body>
+</html>

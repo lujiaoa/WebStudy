@@ -1,0 +1,114 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>使用Selector API实现购物车客户端计算</title>
+<meta charset="utf-8" />
+<style>
+	table{width:600px; text-align:center;
+		border-collapse:collapse;
+	}
+	td,th{border:1px solid black}
+	td[colspan="3"]{text-align:right;}
+</style>
+
+</head>
+<body>
+	<table id="data">
+		<thead>
+			<tr>
+				<th>商品名称</th>
+				<th>单价</th>
+				<th>数量</th>
+				<th>小计</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>iPhone6</td>
+				<td>¥4488.00</td>
+        <td>
+          <button>-</button>
+          <span>1</span>
+          <button>+</button>
+        </td>
+				<td>¥4488.00</td>
+			</tr>
+			<tr>
+				<td>iPhone6 plus</td>
+				<td>¥5288.00</td>
+				<td>
+          <button>-</button>
+          <span>1</span>
+          <button>+</button>
+				</td>
+				<td>¥5288.00</td>
+			</tr>
+			<tr>
+				<td>iPad Air 2</td>
+				<td>¥4288.00</td>
+        <td>
+          <button>-</button>
+          <span>1</span>
+          <button>+</button>
+        </td>
+				<td>¥4288.00</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">Total: </td>
+				<td>¥14064.00</td>
+			</tr>
+		</tfoot>
+	</table>
+  <script>
+		//说人话
+		//实现第一个功能: 点按钮改数量
+		//DOM 4步
+		//1. 查找触发事件的元素
+		//本例中:将来用户点table中每个button元素都会触发变化？
+		//所以，应该查找table下所有button元素，2步: 
+		//1.1 先查找table元素: 查找id为data的table元素
+		var table=document.getElementById("data");
+		console.log(table);
+		//1.2 再在table下查找所有的button元素
+		var btns=table.getElementsByTagName("button");
+		console.log(btns);
+		//2. 绑定事件处理函数
+		//实验: 只给第一个按钮绑定单击事件，当单击第一个按钮时，它可以喊疼！
+		//var btn1=btns[0];
+		//想看元素的属性，不能用console.log()输出
+		//console.log(btn1);
+		//应该用console.dir()输出，dir专门输出内存中的对象存储结构
+		//console.dir(btn1);
+		//为btn1的onclick事件属性提前赋值一个函数，会喊疼
+		//btn1.onclick=function(){ alert("疼！") }
+		
+		//本例中: 所有button都可以点击。所以，要为每个button的onclick提前赋值一个事件处理函数！
+		//遍历btns类数组对象中找到的所有按钮对象
+		for(var btn of btns){
+			//每遍历一个按钮对象，就为这个按钮对象提前保存一个事件处理函数
+			btn.onclick=function(){
+				//alert("疼！");
+				//新需求: 点那个按钮，让那个按钮的内容变成❀
+				//错误的解决: btn是唯一的全局变量，也是循环变量。在触发事件前，btn就移动到最后一个按钮上了
+				//btn.innerHTML="❀";
+						//内容
+				//正确的解决: 
+				console.log(this);
+				this.innerHTML="❀";
+			}
+			//结果：
+			//btns[0].onclick=function(){alert("疼")}
+			//btns[1].onclick=function(){alert("疼")}
+			//btns[2].onclick=function(){alert("疼")}
+			//btns[3].onclick=function(){alert("疼")}
+			//btns[4].onclick=function(){alert("疼")}
+			//btns[5].onclick=function(){alert("疼")}
+		}
+		
+			//3. 查找要修改的元素
+			//4. 修改元素
+	</script>
+</body>
+</html>

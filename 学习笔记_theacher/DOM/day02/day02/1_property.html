@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a id="a1" href="http://tmooc.cn">go to tmooc</a>
+  <script>
+    var a1=document.getElementById("a1");
+    console.dir(a1);
+    //想获得a1的href属性值: 
+    console.log(a1.href);
+    //想判断a1是否包含title属性
+    console.log(a1.title!=="");//false
+    //想为a1设置title属性
+    a1.title="欢迎访问tmooc";
+    console.log(a1.outerHTML);
+    //再判断a1是否包含title属性
+    console.log(a1.title!=="");//true
+    //想移除a1的title属性
+    a1.title="";
+    console.log(a1.outerHTML);
+    //再判断a1是否包含title属性
+    console.log(a1.title!=="");//false
+  </script>
+</body>
+</html>

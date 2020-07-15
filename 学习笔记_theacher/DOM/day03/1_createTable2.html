@@ -1,0 +1,61 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>动态创建表格</title>
+<meta charset="utf-8" />
+<style>
+	table{width:600px; border-collapse:collapse;
+		text-align:center;
+	}
+	td,th{border:1px solid #ccc}
+</style>
+
+</head>
+<body>
+	<div id="data">
+  <!-- table>thead>tr>th*3 -->
+    <table>
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>薪资</th>
+          <th>年龄</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+  <script>
+	var json=[
+    {"ename":"Tom", "salary":11000, "age":25},
+    {"ename":"John", "salary":13000, "age":28},
+    {"ename":"Mary", "salary":12000, "age":25}
+  ];
+  //1. 在HTML中手工添加固定不变的table和表头行内容，并提前添加<tbody>元素
+
+	//2. 创建一个文档片段对象
+  var frag=document.createDocumentFragment();
+  
+  //3. 遍历json数组中每个员工对象
+  for(var emp of json){
+    //4. 每遍历一个员工对象，就创建一个tr元素，追加到文档片段中
+    var tr=document.createElement("tr");
+    frag.appendChild(tr);
+    //5. 遍历当前员工对象中每个属性
+    for(var key in emp){
+      //每遍历一个属性值，就创建td，追加到tr中
+      var td=document.createElement("td");
+      tr.appendChild(td);
+      //6. 设置td的内容为当前属性的属性值
+      td.innerHTML=emp[key];
+    }
+  }
+  //7. 将文档片段一次性添加到table>tbody下
+  var tbody=
+    document.querySelector("#data>table>tbody");
+  tbody.appendChild(frag);
+  </script>
+</body>
+</html>

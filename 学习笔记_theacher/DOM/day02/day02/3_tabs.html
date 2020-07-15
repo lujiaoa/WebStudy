@@ -1,0 +1,99 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>读取并修改元素的属性</title>
+<meta charset="utf-8" />
+<style>
+  *{
+    margin:0;
+    padding: 0;
+  }
+  #tab li{
+    float: left; list-style: none;
+  }
+  #tab li a{
+    display:inline-block;
+    text-decoration:none;
+    width: 80px; height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color:#000;
+  }
+  #container{
+    position: relative;
+  }
+  #content1,#content2,#content3{
+    width: 300px;
+    height: 100px;
+    padding:30px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+  }
+  #tab li:first-child,#content1{
+    background-color: #ffcc00;
+  }
+  #tab li:first-child+li,#content2{
+    background-color: #ff00cc;
+  }
+  #tab li:first-child+li+li,#content3{
+    background-color: #00ccff;
+  }
+</style>
+
+</head>
+<body>
+	<h2>实现多标签页效果</h2>
+  <div class="tabs">
+    <ul id="tab">
+      <li><a href="#content1" data-btn="tab" data-divid="content1">10元套餐</a></li>
+      <li><a href="#content2" data-btn="tab" data-divid="content2">30元套餐</a></li>
+      <li><a href="#content3" data-btn="tab" data-divid="content3">50元包月</a></li>
+    </ul>
+    <div id="container">
+      <div id="content1">
+        10元套餐详情：<br />&nbsp;每月套餐内拨打100分钟，超出部分2毛/分钟
+      </div>
+      <div id="content2">
+        30元套餐详情：<br />&nbsp;每月套餐内拨打300分钟，超出部分1.5毛/分钟
+      </div>
+      <div id="content3">
+        50元包月详情：<br />&nbsp;每月无限量随心打
+      </div>
+    </div>
+  </div>
+  <script>
+    //准备工作: 
+    //1. 为每个触发事件的按钮添加自定义属性，用于查找触发事件的元素
+    //2. 为每个按钮添加自定义扩展属性，提前保存每个按钮对应的div的id
+    //DOM 4步
+    //1. 查找触发事件的元素
+    //本例中: 用户点ul下的包含data-btn属性，且属性值为tab的按钮元素触发变化
+    var tabs=document.querySelectorAll(`[data-btn=tab]`);
+    console.log(tabs);
+    //先定义一个变量i=100，记录目前最大的zIndex值
+    var i=100;//每点一次标签页，都i++。
+    //结果，下次点标签页时的i，一定比上次点标签页时i大1
+    //2. 绑定事件处理函数
+    //本例中: 每个标签都可以点
+    //遍历tabs中每个标签按钮
+    for(var tab of tabs){
+      //每遍历一个标签按钮就要为其绑定单击事件
+      tab.onclick=function(){
+        //3. 查找要修改的元素
+        //本例中: 找到当前标签按钮对应的div
+        //2步: 
+        //3.1 从当前按钮自己身上的data-divid属性中取出对一个div的id名
+        var divid=this.getAttribute("data-divid");
+                //this.dataset.divid
+        //3.2 用拿到的divid，查找对应的div元素对象
+        var div=document.getElementById(divid);
+        //4. 修改元素
+        //本例中: 修改当前按钮对应的div的zIndex值最大！就可以让当前按钮对应div到最上方来，挡住其它div
+        div.style.zIndex=i;
+        i++;
+      }
+    }
+  </script>
+</body>
+</html>

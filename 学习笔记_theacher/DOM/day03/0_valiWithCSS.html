@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+ <head>
+	<meta charset="UTF-8">
+	<title>实现带样式的表单验证</title>
+	<style>
+		table{width:700px}
+		td:first-child{width:60px}
+		td:nth-child(2){width:200px}
+		td:first-child+td{width:200px}
+		td span{color:red}
+		/*文本框旁边div隐藏的根源*/
+		.vali_info{
+			display:none;
+		}
+		.txt_focus{
+			border-top:2px solid black;
+			border-left:2px solid black;
+		}
+
+		.vali_success,.vali_fail{
+			background-repeat:no-repeat;
+			background-position:left center;
+			display:block;
+		}
+		/*文本框验证通过时 div的样式*/
+		.vali_success{
+				background-image:url("../images/ok.png");
+			padding-left:20px;
+			width:0px;height:20px;
+			overflow:hidden;
+		}
+		/*文本框验证失败时 div的样式*/
+		.vali_fail{
+				background-image:url("../images/err.png");
+				border:1px solid red;
+				background-color:#ddd;
+				color:Red;
+				padding-left:30px;
+		}
+
+
+	</style>
+ </head>
+ <body>
+	<form id="form1">
+		<h2>增加管理员</h2>
+		<table>
+			<tr>
+				<td>姓名：</td>
+        <td>
+					<input name="username"/>
+					<span>*</span>
+				</td>
+				<td>
+					<div class="vali_info">
+						10个字符以内的字母、数字或下划线的组合
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>密码：</td>
+				<td>
+					<input type="password" name="pwd"/>
+					<span>*</span>
+				</td>
+				<td>
+					<div class="vali_info">6位数字</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2">
+          <input type="submit" value="保存"/>
+          <input type="reset" value="重填"/>
+				</td>
+			</tr>				
+	    </table>
+	</form>
+<script>
+//只实现姓名文本框的验证:
+//2个需求: 
+//1. 文本框获得焦点时，显示右边的提示
+//2. 文本框失去焦点时，验证文本款中的内容
+	//如果验证通过，就修改右边的提示为正确的样式
+	//如果验证不通过，就修改右边的提示为错误的样式
+
+//实现第一个需求: 文本框获得焦点时，显示右边的提示
+//DOM 4步:
+//1. 查找触发事件的元素
+//本例中: name属性=username的文本框获得焦点触发变化
+//元素缩写 业务单词
+//   ↓    ↓
+var txtName=
+	document.getElementsByName("username")[0];//复习
+console.log(txtName);
+//2. 绑定事件处理函数
+//本例中: 文本框获得焦点时触发变化
+txtName.onfocus=function(){
+	//3. 查找要修改的元素
+	//本例中: 当前文本框获得焦点，却要修改当前文本框的父元素td的下一个兄弟元素td的第一个孩子元素div的样式
+	var div=this.parentNode.nextElementSibling.children[0];
+	//4. 修改元素
+	//本例中: div因为带有vali_info class才默认隐藏，所以，我们需要将div的class暂时清除，让div显示出来
+	div.className="";
+}
+
+//实现第二个需求: 当文本框失去焦点时，验证文本框的内容，修改旁边div的样式
+//DOM 4步
+//1. 查找触发事件的元素
+//本例中: 还是姓名文本框失去焦点——上边已经找过了txtName
+//2. 绑定事件处理函数
+//本例中: 文本框失去焦点时，触发验证和修改
+txtName.onblur=function(){
+	//3. 查找要修改的元素
+	//本例中: 当前文本框失去焦点，却要修改当前文本框的父元素td的下一个兄弟元素td的第一个孩子元素div的样式
+	var div=this.parentNode.nextElementSibling.children[0];
+	//4. 修改元素
+	//定义正则表达式
+	var reg=/^\w{1,10}$/;
+	//如果验证文本框的内容通过
+	if(reg.test(this.value)==true){
+		//就修改div为正确的样式
+		div.className="vali_success";
+	}else{//否则如果验证文本框的内容不通过
+		//就修改div为错误的样式
+		div.className="vali_fail";
+	}
+}
+</script>
+ </body>
+</html>

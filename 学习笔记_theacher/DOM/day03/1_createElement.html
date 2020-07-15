@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //想创建a
+    var a=document.createElement("a");
+    console.log(a.outerHTML);
+    a.href="http://tmooc.cn";
+    a.innerHTML="go to tmooc";
+    console.log(a);
+    //想把a追加到body中
+    document.body.appendChild(a);
+
+    //创建一个文本框
+    var input=document.createElement("input");
+    //省略第二步
+    //希望input出现在a之后:
+    document.body.appendChild(input);
+    //希望input出现在a之前:
+    //document.body.insertBefore(input,a);
+    //希望用input替换a
+    //document.body.replaceChild(input,a);
+  </script>
+</body>
+</html>

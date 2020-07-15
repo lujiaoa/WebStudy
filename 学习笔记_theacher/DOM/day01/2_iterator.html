@@ -1,0 +1,66 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>遍历节点树</title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<span>Hello World !</span>
+		<ul id="nav">
+			<li class="parent">电影</li>
+			<li class="parent">综艺
+				<ul>
+					<li class="child active">跑男</li>
+					<li class="child">爸爸</li>
+					<li class="child">极限</li>
+				</ul>
+			</li>
+			<li class="parent">剧集</li>
+		</ul>	
+		用户名: <input type="text" name="uname"><br/>
+		性别: 
+		<label>
+			<input type="radio" name="sex" value="1">男
+		</label>
+		<label>
+			<input type="radio" name="sex" value="0">女
+		</label>
+    <script>
+			//想查找id为nav的ul
+			var ul=document.getElementById("nav");
+			console.log(ul);
+			//强调: 所有元素不查找，是不能直接使用！
+			//要想使用某个元素，都必须先查找再使用
+			//想查找ul下的所有li
+			var lis=ul.getElementsByTagName("li");
+			console.log(lis);
+
+			//想在body下找span
+			//只可能找到一个span时
+			var span=
+				//document.body.getElementsByTagName("span")
+				//返回类数组对象，其中包含一个span元素对象
+
+				document.body.getElementsByTagName("span")[0]
+				//直接返回类数组对象中0位置的span元素对象。
+			console.log(span);//
+
+			//想查找ul下所有class为parent的li
+			var parents=ul.getElementsByClassName("parent");
+			console.log(parents);
+			//想查找ul下所有class为child的li
+			var children=ul.getElementsByClassName("child");
+			console.log(children);
+			//想查找ul下class为active的一个li
+			var liActive=ul.getElementsByClassName("active")[0];
+			console.log(liActive);
+
+			//想查找name为sex的两个元素
+			var radios=document.getElementsByName("sex");
+			console.log(radios);
+			//想查找name为uname的一个文本框
+			var txtUname=document.getElementsByName("uname")[0];
+			console.log(txtUname);
+		</script>
+	</body>
+</html>

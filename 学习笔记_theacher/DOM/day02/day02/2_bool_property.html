@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="chb" type="checkbox">同意
+  <button id="btn1">提交</button>
+  <script>
+    var btn1=document.getElementById("btn1");
+    btn1.onclick=function(){
+      var chb=document.getElementById("chb");
+      console.log(chb.checked==true?"选中":"未选中");
+    }
+  </script>
+</body>
+</html>

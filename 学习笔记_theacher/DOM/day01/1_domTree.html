@@ -1,0 +1,60 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>DOM Tree</title>
+	<meta charset="utf-8" />
+</head>
+
+<body>
+	<span id="s1">Hello</span>
+	<h1>标题一</h1>
+	<script>
+		//想输出document对象
+		console.log(document);
+		//想输出html元素对象
+		console.log(document.documentElement);
+		//想输出head元素对象
+		console.log(document.head);
+		//想输出body元素对象
+		console.log(document.body);
+		//本例暂时不用live server运行
+		//因为live server会自动插入一个多余的script，干扰我们的查找。
+		//应该直接在硬盘上的文件夹中找到这个.html文件，右键，打开方式，用chrome打开
+		//想获得body的父节点: 应该是<html>
+		//既可以用parentNode，又可以用parentElement
+		var html=document.body.parentNode;//首选
+		//var html=document.body.parentElement;
+		console.log(html);//正确
+		//因为在网页中能当爹，包含其它子内容的，只可能是元素。<开始标签>子内容</结束标签>
+
+
+		//想获得body下的所有直接子元素: 应该是3个
+		//错误做法: 
+		//var childNodes=document.body.childNodes;
+		//console.log(childNodes);//7个
+		//正确做法: 
+		var children=document.body.children;
+		console.log(children);//3个
+		//想获得body下的第一个直接子元素: 应该是span
+		//错误做法: 
+		//var span=document.body.firstChild;
+		//正确做法: 
+		var span=document.body.firstElementChild;
+		console.log(span);
+		//想实现body中最后一个直接子元素: 应该是script
+		var script=document.body.lastElementChild;
+		console.log(script);
+		//想获得body中第二个孩子：应该是h1
+		var h1=document.body.children[1];
+		console.log(h1);
+		//想获得h1，还可以通过span的下一个兄弟元素获得
+		var h1=span.nextElementSibling;
+		console.log(h1);
+		//想获得h1，还可以通过script的前一个兄弟元素获得
+		var h1=script.previousElementSibling;
+		console.log(h1);
+	</script>
+</body>
+
+</html>

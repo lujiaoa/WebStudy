@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a id="a1" data-click="btn" data-content="欢迎访问tmooc" href="javascript:;">go to tmooc</a>
+  <script>
+    //想查找带有data-click属性的，且属性值为btn的a元素
+    var btn=document.querySelector("[data-click=btn]");
+    console.log(btn.outerHTML);
+    //想获得data-content属性的值
+    //console.log(btn.getAttribute("data-content"));
+    console.log(btn.dataset.content);
+    //想修改data-content属性的值为Welcome to tmooc
+    //btn.setAttribute("data-content","welcome to tmooc");
+    btn.dataset.content="welcome to tmooc";
+    console.log(btn);
+  </script>
+</body>
+</html>
